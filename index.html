@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>市场快讯和财经日历</title>
     <style>
-        /* 通用样式 */
+        /* 基本样式 */
         body, html {
             margin: 0;
             padding: 0;
@@ -13,27 +13,37 @@
             width: 100%;
             font-family: Arial, sans-serif;
         }
+
+        /* 容器布局 */
         .container {
             display: flex;
             height: 100%;
             width: 100%;
         }
+
+        /* iframe容器 */
         .iframe-container {
             flex: 1;
             position: relative;
             overflow: hidden;
         }
+
+        /* 左侧边界 */
         .left {
             border-right: 1px solid #ccc;
         }
+
+        /* 右侧边界 */
         .right {
             border-left: 1px solid #ccc;
         }
+
+        /* iframe样式 */
         iframe {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%; 
+            width: 100%;
             height: 100%;
             border: none;
         }
@@ -41,9 +51,11 @@
 </head>
 <body>
     <div class="container">
+        <!-- 左侧市场快讯 -->
         <div class="iframe-container left">
             <iframe frameborder="0" width="100%" height="100%" scrolling="yes" src="https://www.jin10.com/example/jin10.com.html?fontSize=14px&theme=white"></iframe>
         </div>
+        <!-- 右侧财经日历 -->
         <div class="iframe-container right">
             <iframe frameborder="0" width="100%" height="100%" scrolling="yes" src="https://rili-d.jin10.com/open.php?fontSize=14px&scrolling=yes&theme=primary"></iframe>
         </div>

@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5f8b217-b3f1-4913-b321-0d0a8add5050" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Selenium.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Selenium.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    <list default="true" id="d5f8b217-b3f1-4913-b321-0d0a8add5050" name="更改" comment="2024/9/13 Github Page 建站">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Selenium测试.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +23,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Interstellar1217&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Interstellar1217/Selenium.git&quot;,
+    &quot;accountId&quot;: &quot;01ff8757-b7b0-4bde-82df-82332fd4f7bf&quot;
+  }
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -55,7 +61,12 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/HLQH/PycharmProjects/Selenium&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\HLQH\PycharmProjects\Selenium\parse_file" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.list_file">
     <configuration name="list_file" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Selenium" />
       <option name="ENV_FILES" value="" />
@@ -92,7 +103,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\HLQH\PycharmProjects\Selenium\parse_file\main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -114,7 +125,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/parse_jin10.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\HLQH\PycharmProjects\Selenium\parse_file\parse_jin10.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -140,6 +151,28 @@
       <option name="presentableId" value="Default" />
       <updated>1725518403168</updated>
     </task>
+    <task id="LOCAL-00001" summary="2024/9/9 Selenium爬取-针对页面格式">
+      <option name="closed" value="true" />
+      <created>1725872857589</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1725872857589</updated>
+    </task>
+    <task id="LOCAL-00002" summary="2024/9/13 Github Page 建站">
+      <option name="closed" value="true" />
+      <created>1726196602865</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1726196602865</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="2024/9/9 Selenium爬取-针对页面格式" />
+    <MESSAGE value="2024/9/13 Github Page 建站" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024/9/13 Github Page 建站" />
   </component>
 </project>
