@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5f8b217-b3f1-4913-b321-0d0a8add5050" name="更改" comment="2024/9/13 Github Page 建站">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+    <list default="true" id="d5f8b217-b3f1-4913-b321-0d0a8add5050" name="更改" comment="2024/9/13 样式与内容隔离+gitignore文件">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +23,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -187,13 +187,46 @@
       <option name="project" value="LOCAL" />
       <updated>1726196901361</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="2024/9/13 样式与内容隔离+gitignore文件">
+      <option name="closed" value="true" />
+      <created>1726207117878</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1726207117878</updated>
+    </task>
+    <task id="LOCAL-00006" summary="2024/9/13 样式与内容隔离+gitignore文件">
+      <option name="closed" value="true" />
+      <created>1726207129577</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1726207129577</updated>
+    </task>
+    <task id="LOCAL-00007" summary="2024/9/13 样式与内容隔离+gitignore文件">
+      <option name="closed" value="true" />
+      <created>1726207257115</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1726207257115</updated>
+    </task>
+    <task id="LOCAL-00008" summary="2024/9/13 样式与内容隔离+gitignore文件">
+      <option name="closed" value="true" />
+      <created>1726207272232</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1726207272232</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="2024/9/9 Selenium爬取-针对页面格式" />
     <MESSAGE value="2024/9/13 Github Page 建站" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024/9/13 Github Page 建站" />
+    <MESSAGE value="2024/9/13 样式与内容隔离+gitignore文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024/9/13 样式与内容隔离+gitignore文件" />
   </component>
 </project>

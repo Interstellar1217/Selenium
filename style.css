@@ -5,37 +5,26 @@ body, html {
     height: 100%;
     width: 100%;
     font-family: Arial, sans-serif;
+    box-sizing: border-box;
 }
 
 /* 容器布局 */
 .container {
     display: flex;
-    height: 100%;
-    width: 100%;
+    height: 100vh; /* 确保容器占满视口高度 */
+    width: 100vw; /* 确保容器占满视口宽度 */
 }
 
 /* iframe容器 */
 .iframe-container {
-    flex: 1;
+    flex: 1; /* 确保每个 iframe 容器占用 50% 宽度 */
+    border: 1px solid #ccc;
     position: relative;
     overflow: hidden;
 }
 
-/* 左侧边界 */
-.left {
-    border-right: 1px solid #ccc;
-}
-
-/* 右侧边界 */
-.right {
-    border-left: 1px solid #ccc;
-}
-
 /* iframe样式 */
 iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     border: none;
