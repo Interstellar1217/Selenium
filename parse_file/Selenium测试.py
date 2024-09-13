@@ -3,7 +3,6 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
@@ -18,21 +17,12 @@ print("Path:", os.environ.get('PATH'))
 
 
 def setup_driver():
-    # 设置 WebDriver
     chrome_options = webdriver.ChromeOptions()
-    # 如果需要无头模式，取消注释以下行
-    # chrome_options.add_argument('--headless')
-    # chrome_options.add_argument('--disable-gpu')
-
-    # 设置 User-Agent
     chrome_options.add_argument(
         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
         "Chrome/58.0.3029.110 Safari/537.3")
-
-    # 指定 Chrome和ChromeDriver的路径
-    chrome_binary_path = "C:/Program Files/Google/Chrome/Application/chrome.exe"  # 替换为实际的Chrome路径
-    chromedriver_path = "D:/chromedriver-win64/chromedriver.exe"  # 替换为实际的ChromeDriver路径
-
+    chrome_binary_path = "C:/Program Files/Google/Chrome/Application/chrome.exe"
+    chromedriver_path = "D:/chromedriver-win64/chromedriver.exe"
     chrome_options.binary_location = chrome_binary_path
     service = Service(executable_path=chromedriver_path)
     driver = webdriver.Chrome(service=service, options=chrome_options)
@@ -43,45 +33,73 @@ def read_external_html(url, driver):
     try:
         driver.get(url)
 
-        # 等待页面加载完成
-        time.sleep(5)  # 等待一段时间让页面加载
-
-        # 等待特定元素加载完成
+        # 等待页面中的 iframe 元素加载
         wait = WebDriverWait(driver, 10)
-        wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'jin-flash-item-container')))
+        iframes = wait.until(EC.presence_of_all_elements_located((By.TAG_NAME, 'iframe')))
+        print(f"页面上找到 {len(iframes)} 个 iframe。")
 
-        # 模拟滚动页面，加载更多内容
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(3)
+        iframe_contents = []
+        for iframe in iframes:
+            driver.switch_to.frame(iframe)
+            try:
+                # 等待 iframe 内的指定元素加载
+                wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'jin-flash_item')))
+                print("iframe 内找到 'jin-flash_item' 元素。")
+                iframe_contents.append(driver.page_source)
+            except Exception as e:
+                print(f"未找到 'jin-flash_item' 元素: {e}")
+            driver.switch_to.default_content()
 
-        return driver.page_source
+        return iframe_contents
     except Exception as e:
-        print(f"Failed to fetch data from {url}: {e}")
-        return None
+        print(f"无法从 {url} 获取数据: {e}")
+        return []
 
 
-def parse_html_content(html_content):
-    # 使用 BeautifulSoup 解析页面内容
+def parse_left_html_content(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
+    flash_items = soup.find_all('div', class_='jin-flash_item')
 
-    # 找到所有包含快讯信息的元素
-    flash_items = soup.find_all('div', class_='jin-flash-item-container')
+    if not flash_items:
+        print("未找到任何 'jin-flash_item' 元素。")
+        return []
 
     news_list = []
     for item in flash_items:
-        # 提取时间
-        time = item.find('div', class_='item-time').text.strip() if item.find('div', class_='item-time') else ''
+        time_element = item.find('div', class_='jin-flash_time')
+        text_element = item.find('p', class_='J_flash_text')
 
-        # 提取内容
-        content = item.find('div', class_='flash-text').text.strip() if item.find('div', class_='flash-text') else ''
+        if time_element and text_element:
+            time_text = time_element.text.strip()
+            text_text = text_element.text.strip()
+            news_list.append({"time": time_text, "text": text_text})
+        else:
+            print("某个项目缺少时间或文本元素。")
 
-        # 构造新闻信息字典
-        news_list.append({
-            "time": time,
-            "content": content
-        })
-
+    print("解析的市场快讯：")
+    print(news_list)
     return news_list
+
+
+def parse_right_html_content(html_content):
+    soup = BeautifulSoup(html_content, 'html.parser')
+    list_items = soup.find_all('div', class_='jin-list-item is-data')
+
+    if not list_items:
+        print("未找到任何 'jin-list-item is-data' 元素。")
+        return []
+
+    calendar_list = []
+    for item in list_items:
+        time = item.find('span', class_='time').text.strip() if item.find('span', class_='time') else ''
+        title = item.find('a', href=lambda x: x and "/detail/" in x).text.strip() if item.find('a', href=lambda
+            x: x and "/detail/" in x) else ''
+        value = item.find('span', class_='actual').text.strip() if item.find('span', class_='actual') else ''
+        calendar_list.append({"time": time, "title": title, "value": value})
+
+    print("解析的财经日历：")
+    print(calendar_list)
+    return calendar_list
 
 
 def send_to_wechat_robot(webhook_url, message):
@@ -93,7 +111,6 @@ def send_to_wechat_robot(webhook_url, message):
         }
     }
     response = requests.post(webhook_url, data=json.dumps(payload), headers=headers)
-
     if response.status_code == 200:
         print("Message sent successfully.")
     else:
@@ -101,40 +118,43 @@ def send_to_wechat_robot(webhook_url, message):
 
 
 def main():
-    # 获取当前文件所在的目录
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-
-    # 定义外部数据源 URL
-    urls = [
-        "https://www.jin10.com/market_flash",  # 示例URL，应替换为你实际要抓取的URL
-        "https://rili-d.jin10.com/open.php"  # 可以保留或移除此URL
-    ]
-
-    # 设置 WebDriver
+    urls = ["https://interstellar1217.github.io/Selenium/"]
     driver = setup_driver()
 
     try:
         for url in urls:
-            print(f"Fetching data from {url}...")
-            html_content = read_external_html(url, driver)
-            if html_content:
-                news = parse_html_content(html_content)
-                print(news)
+            print(f"从 {url} 获取数据中...")
+            iframe_contents = read_external_html(url, driver)
 
-                # 构造消息内容
-                message = "\n".join([
-                    f"时间：{item['time']}\n内容：{item['content']}\n{'-' * 50}"
-                    for item in news
-                ])
+            if len(iframe_contents) >= 2:
+                # 解析左侧市场快讯
+                market_news = parse_left_html_content(iframe_contents[0])
+                # 解析右侧财经日历
+                financial_calendar = parse_right_html_content(iframe_contents[1])
 
-                # 示例Webhook URL
-                webhook_url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=df41d4fb-8327-4dce-a190-ccfd1736823c"
+                if market_news and financial_calendar:
+                    # 构造消息内容
+                    news_message = "\n".join([
+                        f"时间：{item['time']}\n内容：{item['text']}\n{'-' * 50}"
+                        for item in market_news
+                    ])
 
-                send_to_wechat_robot(webhook_url, message)
+                    calendar_message = "\n".join([
+                        f"时间：{item['time']}\n标题：{item['title']}\n值：{item['value']}\n{'-' * 50}"
+                        for item in financial_calendar
+                    ])
+
+                    full_message = f"Market News:\n{news_message}\n\nFinancial Calendar:\n{calendar_message}"
+
+                    # 示例Webhook URL
+                    webhook_url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=df41d4fb-8327-4dce-a190-ccfd1736823c"
+
+                    send_to_wechat_robot(webhook_url, full_message)
+                else:
+                    print("无可用的新闻数据或财经日历数据。")
             else:
-                print("No news data available.")
+                print("未找到足够的 iframe 内容。")
     finally:
-        # 关闭 WebDriver
         driver.quit()
 
 

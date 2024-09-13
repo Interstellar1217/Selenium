@@ -41,12 +41,17 @@ def read_external_html(url, driver):
         for iframe in iframes:
             driver.switch_to.frame(iframe)
             try:
-                # 等待 iframe 内的指定元素加载
-                wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'jin-flash_item')))
+                # 尝试找到 'jin-flash_item' 或 'jin-table-column' 类的元素
+                elements = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'jin-flash_item')))
                 print("iframe 内找到 'jin-flash_item' 元素。")
                 iframe_contents.append(driver.page_source)
             except Exception as e:
-                print(f"未找到 'jin-flash_item' 元素: {e}")
+                try:
+                    elements = wait.until(EC.presence_of_all_elements_located((By.CLASS_NAME, 'jin-table-column')))
+                    print("iframe 内找到 'jin-table-column' 元素。")
+                    iframe_contents.append(driver.page_source)
+                except Exception as ee:
+                    print(f"未找到 'jin-flash_item' 或 'jin-table-column' 元素: {ee}")
             driver.switch_to.default_content()
 
         for content in iframe_contents:
@@ -61,22 +66,30 @@ def read_external_html(url, driver):
 def parse_html_content(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
     flash_items = soup.find_all('div', class_='jin-flash_item')
+    table_columns = soup.find_all('div', class_='jin-table-column')
 
-    if not flash_items:
-        print("未找到任何 'jin-flash_item' 元素。")
+    if not flash_items and not table_columns:
+        print("未找到任何 'jin-flash_item' 或 'jin-table-column' 元素。")
         return []
 
     news_list = []
-    for item in flash_items:
-        time_element = item.find('div', class_='jin-flash_time')
-        text_element = item.find('p', class_='J_flash_text')
-
-        if time_element and text_element:
-            time_text = time_element.text.strip()
-            text_text = text_element.text.strip()
-            news_list.append({"time": time_text, "text": text_text})
-        else:
-            print("某个项目缺少时间或文本元素。")
+    for item in flash_items + table_columns:
+        if 'jin-flash_item' in item.get('class', []):
+            time_element = item.find('div', class_='jin-flash_time')
+            text_element = item.find('p', class_='J_flash_text')
+            if time_element and text_element:
+                time_text = time_element.text.strip()
+                text_text = text_element.text.strip()
+                news_list.append({"time": time_text, "text": text_text})
+            else:
+                print("某个 'jin-flash_item' 缺少时间或文本元素。")
+        elif 'jin-table-column' in item.get('class', []):
+            name_element = item.find('span', class_='data-name-text')
+            if name_element:
+                text = name_element.text.strip()
+                news_list.append({"text": text})
+            else:
+                print("某个 'jin-table-column' 缺少 'data-name-text' 元素。")
 
     print("解析的新闻项：")
     print(news_list)

@@ -1,16 +1,136 @@
-# 这是一个示例 Python 脚本。
+import os
+import time
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from bs4 import BeautifulSoup
+import requests
+import json
+import sys
 
-# 按 Shift+F10 执行或将其替换为您的代码。
-# 按 双击 Shift 在所有地方搜索类、文件、工具窗口、操作和设置。
+print(sys.prefix)
+print("Current Working Directory:", os.getcwd())
+print("PYTHONPATH:", os.environ.get('PYTHONPATH'))
+print("Path:", os.environ.get('PATH'))
 
 
-def print_hi(name):
-    # 在下面的代码行中使用断点来调试脚本。
-    print(f'Hi, {name}')  # 按 Ctrl+F8 切换断点。
+def setup_driver():
+    # 设置 WebDriver
+    chrome_options = webdriver.ChromeOptions()
+    # 如果需要无头模式，取消注释以下行
+    # chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--disable-gpu')
+
+    # 设置 User-Agent
+    chrome_options.add_argument(
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/58.0.3029.110 Safari/537.3")
+
+    # 指定 Chrome和ChromeDriver的路径
+    chrome_binary_path = "C:/Program Files/Google/Chrome/Application/chrome.exe"  # 替换为实际的Chrome路径
+    chromedriver_path = "D:/chromedriver-win64/chromedriver.exe"  # 替换为实际的ChromeDriver路径
+
+    chrome_options.binary_location = chrome_binary_path
+    service = Service(executable_path=chromedriver_path)
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    return driver
 
 
-# 按装订区域中的绿色按钮以运行脚本。
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def read_external_html(url, driver):
+    try:
+        driver.get(url)
+        # 等待页面加载完成
+        time.sleep(3)  # 等待一段时间让页面加载
 
-# 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
+        # 获取所有iframe标签
+        iframes = driver.find_elements(By.TAG_NAME, 'iframe')
+
+        iframe_contents = []
+        for iframe in iframes:
+            driver.switch_to.frame(iframe)
+            iframe_contents.append(driver.page_source)
+            driver.switch_to.default_content()
+
+        return iframe_contents
+    except Exception as e:
+        print(f"Failed to fetch data from {url}: {e}")
+        return []
+
+
+def parse_html_content(html_content):
+    # 使用 BeautifulSoup 解析页面内容
+    soup = BeautifulSoup(html_content, 'html.parser')
+
+    # 假设市场快讯数据包含在特定的 HTML 元素中
+    flash_items = soup.find_all('div', class_='jin-flash-item')
+    news_list = []
+    for item in flash_items:
+        time = item.find('div', class_='item-time').text.strip() if item.find('div', class_='item-time') else ''
+        title = item.find('b', class_='right-common-title').text.strip() if item.find('b',
+                                                                                      class_='right-common-title') else ''
+        content = item.find('div', class_='flash-text').text.strip() if item.find('div', class_='flash-text') else ''
+        news_list.append({"time": time, "title": title, "content": content})
+
+    return news_list
+
+
+def send_to_wechat_robot(webhook_url, message):
+    headers = {'Content-Type': 'application/json'}
+    payload = {
+        "msgtype": "markdown",
+        "markdown": {
+            "content": message
+        }
+    }
+    response = requests.post(webhook_url, data=json.dumps(payload), headers=headers)
+
+    if response.status_code == 200:
+        print("Message sent successfully.")
+    else:
+        print(f"Failed to send message: {response.status_code}")
+
+
+def main():
+    # 获取当前文件所在的目录
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # 定义外部数据源 URL
+    urls = [
+        "https://interstellar1217.github.io/Selenium/",
+    ]
+
+    # 设置 WebDriver
+    driver = setup_driver()
+
+    try:
+        for url in urls:
+            print(f"Fetching data from {url}...")
+            iframe_contents = read_external_html(url, driver)
+
+            # 假设第一个iframe是市场快讯
+            if iframe_contents:
+                news = parse_html_content(iframe_contents[0])
+                print(news)
+
+                # 构造消息内容
+                message = "\n".join([
+                    f"时间：{item['time']}\n标题：{item['title']}\n内容：{item['content']}\n{'-' * 50}"
+                    for item in news
+                ])
+
+                # 示例Webhook URL
+                webhook_url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=df41d4fb-8327-4dce-a190-ccfd1736823c"
+
+                send_to_wechat_robot(webhook_url, message)
+            else:
+                print("No news data available.")
+    finally:
+        # 关闭 WebDriver
+        driver.quit()
+
+
+if __name__ == "__main__":
+    main()
