@@ -1,0 +1,42 @@
+/* 基本样式 */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+
+/* 容器布局 */
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+/* iframe容器 */
+.iframe-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 左侧边界 */
+.left {
+    border-right: 1px solid #ccc;
+}
+
+/* 右侧边界 */
+.right {
+    border-left: 1px solid #ccc;
+}
+
+/* iframe样式 */
+iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
