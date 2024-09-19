@@ -1,22 +1,58 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>市场快讯和财经日历</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>市场快讯和财经日历</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+    .iframe-container {
+      flex: 1;
+      border: 1px solid #ccc;
+      position: relative;
+      overflow: hidden;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM fully loaded and parsed');
+
+      // 示例：添加一个事件监听器
+      document.querySelector('.container').addEventListener('click', function(event) {
+        console.log('Container clicked:', event);
+      });
+    });
+  </script>
 </head>
 <body>
-    <div class="container">
-        <!-- 左侧市场快讯 -->
-        <div class="iframe-container left">
-            <iframe frameborder="0" width="100%" height="100%" scrolling="yes" src="https://www.jin10.com/example/jin10.com.html?fontSize=14px&theme=white"></iframe>
-        </div>
-        <!-- 右侧财经日历 -->
-        <div class="iframe-container right">
-            <iframe frameborder="0" width="100%" height="100%" scrolling="yes" src="https://rili-d.jin10.com/open.php?fontSize=14px&scrolling=yes&theme=primary"></iframe>
-        </div>
+  <div class="container">
+    <!-- 左侧市场快讯 -->
+    <div class="iframe-container left">
+      <iframe frameborder="0" scrolling="yes" src="https://www.jin10.com/example/jin10.com.html?fontSize=14px&theme=white"></iframe>
     </div>
-    <script src="assets/js/script.js"></script>
+    <!-- 右侧财经日历 -->
+    <div class="iframe-container right">
+      <iframe frameborder="0" scrolling="yes" src="https://rili-d.jin10.com/open.php?fontSize=14px&scrolling=yes&theme=primary"></iframe>
+    </div>
+  </div>
 </body>
 </html>

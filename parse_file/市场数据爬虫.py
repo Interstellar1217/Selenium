@@ -77,7 +77,7 @@ def read_external_html(url, driver):
                     current_items = len(elements)
 
                 # 设置滚动次数限制
-                max_scroll_attempts = 5
+                max_scroll_attempts = 50
                 scroll_attempts = 0
 
                 # 模拟滚动加载更多数据
@@ -110,6 +110,7 @@ def read_external_html(url, driver):
 
 
 # 解析新闻数据
+# 解析左侧 HTML 内容
 def parse_left_html_content(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
     flash_items = soup.find_all('div', class_='jin-flash_item')
@@ -119,6 +120,9 @@ def parse_left_html_content(html_content):
         file.write(html_content)
 
     news_list = []
+    # 关键词
+    target_keyword = "金十数据整理"
+
     for item in flash_items:
         time_element = item.find('div', class_='jin-flash_time')
         text_element = item.find('p', class_='J_flash_text')
@@ -130,12 +134,17 @@ def parse_left_html_content(html_content):
             time_text = time_element.text.strip()
             text_text = text_element.text.strip()
 
-            # 关键词
-            keywords = ["金十数据整理"]
-            if any(keyword in text_text for keyword in keywords):
+            # 查找包含关键词 "金十数据整理" 的新闻
+            if target_keyword in text_text:
                 news_list.append({"time": time_text, "text": text_text})
+                print(f"找到包含关键词 '{target_keyword}' 的新闻，停止继续搜索。")
+                break  # 找到第一条新闻后停止搜索
         else:
             print("某个 'jin-flash_item' 缺少时间或文本元素。")
+
+    if not news_list:
+        print(f"没有找到包含关键词 '{target_keyword}' 的新闻。")
+
     return news_list
 
 
@@ -191,16 +200,10 @@ def fetch_market_news():
         driver.quit()
 
 
-# 主函数 - 设置定时任务
+# 主函数 - 立即运行抓取新闻
 def main():
-    # 定时任务，每天早上9点和晚上9点执行
-    schedule.every().day.at("09:00").do(fetch_market_news)
-    schedule.every().day.at("21:00").do(fetch_market_news)
-
-    # 循环保持程序运行，执行定时任务
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    # 立即执行抓取新闻数据的函数
+    fetch_market_news()
 
 
 if __name__ == "__main__":

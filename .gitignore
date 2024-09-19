@@ -16,3 +16,73 @@ build/
 
 # Ignore log files
 *.log
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+*.pyc
+*.pyo
+__pycache__/
+*.bak
+*.class
+
+# Ignore virtual environment directories
+venv/
+env/
+.venv/
+ENV/
+.virtualenv/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore operating system generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Ignore PyCharm specific files
+.pydevproject
+.project
+.settings/
+*.iml
+
+# Ignore Visual Studio Code specific files
+*.code-workspace
+
+# Ignore Selenium related files
+# Ignore geckodriver, chromedriver, etc.
+geckodriver.log
+chromedriver.log
+msedgedriver.log
+webdriver.log
+
+# Ignore browser profiles (if you are using them)
+browser_profiles/
+
+# Ignore large data files or datasets
+data/
+datasets/
+
+# Ignore screenshots or video recordings
+screenshots/
+videos/
+
+# Ignore test reports
+reports/
+test-reports/
+
+# Ignore other temporary or cache files
+.cache/
+*.lock
+*.sqlite3
+*.db
+*.db-journal
+*.sqlite-journal
+
+# Ignore Docker related files
+.dockerignore
+Dockerfile
+docker-compose.yml
+docker-compose.override.yml
