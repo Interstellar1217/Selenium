@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5f8b217-b3f1-4913-b321-0d0a8add5050" name="更改" comment="2024.9.19 - 市场数据关键字爬取">
-      <change afterPath="$PROJECT_DIR$/parse_file/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parse_file/news_scraper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parse_file/wechat_bot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_file/Selenium.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/driver_setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_file/Selenium测试.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_file/Test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_file/Yanami_Anna.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_file/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_file/parse_both.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/html_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_file/parse_jin10.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_file/市场数据爬虫.py" beforeDir="false" />
-    </list>
+    <list default="true" id="d5f8b217-b3f1-4913-b321-0d0a8add5050" name="更改" comment="2024.9.20 - 市场数据解析与定时爬取" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -186,7 +173,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726736689792</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="2024.9.20 - 市场数据解析与定时爬取">
+      <option name="closed" value="true" />
+      <created>1726815870716</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1726815870716</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -194,6 +189,7 @@
     <MESSAGE value="2024/9/9 Selenium爬取-针对页面格式" />
     <MESSAGE value="2024/9/13 Github Page 建站" />
     <MESSAGE value="2024.9.19 - 市场数据关键字爬取" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024.9.19 - 市场数据关键字爬取" />
+    <MESSAGE value="2024.9.20 - 市场数据解析与定时爬取" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024.9.20 - 市场数据解析与定时爬取" />
   </component>
 </project>
