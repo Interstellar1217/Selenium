@@ -1,12 +1,7 @@
-import os
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
-
-# 指定 Chrome 和 chromedriver 路径
-CHROME_BINARY_PATH = "C:/Program Files/Google/Chrome/Application/chrome.exe"
-CUSTOM_CHROMEDRIVER_PATH = "D:/chromedriver-win64"
 
 
 def setup_driver():
@@ -28,16 +23,10 @@ def setup_driver():
     # 禁用 /dev/shm 共享内存
     chrome_options.add_argument('--disable-dev-shm-usage')
 
-    # 设置 Chrome 二进制文件路径
-    chrome_options.binary_location = CHROME_BINARY_PATH
-
     # 使用 webdriver_manager 自动管理 chromedriver，并指定下载路径
-    # 设置环境变量 WDM_LOCAL 来指定下载位置
-    os.environ['WDM_LOCAL'] = CUSTOM_CHROMEDRIVER_PATH
-    chromedriver_path = ChromeDriverManager().install()
+    service = Service(ChromeDriverManager().install())
 
     # 创建 WebDriver 实例
-    service = Service(executable_path=chromedriver_path)
     driver = webdriver.Chrome(service=service, options=chrome_options)
     return driver
 

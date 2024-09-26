@@ -1,6 +1,6 @@
-import requests
 import json
-from config import WECHAT_WEBHOOK_URL
+
+import requests
 
 
 def send_to_wechat_robot(webhook_url, message):
