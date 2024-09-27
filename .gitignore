@@ -86,3 +86,5 @@ test-reports/
 Dockerfile
 docker-compose.yml
 docker-compose.override.yml
+./iframe_content.html
+./right_iframe_content.html

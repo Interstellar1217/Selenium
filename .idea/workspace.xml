@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5f8b217-b3f1-4913-b321-0d0a8add5050" name="更改" comment="2024.9.23 - 代码更新优化">
-      <change afterPath="$PROJECT_DIR$/parse_file/Test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parse_file/iframe_content.html" afterDir="false" />
+    <list default="true" id="d5f8b217-b3f1-4913-b321-0d0a8add5050" name="更改" comment="2024.9.26 - 方法优化与结构调整">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_file/driver_setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/driver_setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parse_file/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parse_file/html_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/html_parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parse_file/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parse_file/right_iframe_content.html" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/right_iframe_content.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parse_file/wechat_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/wechat_bot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +47,7 @@
     <setting file="file://$PROJECT_DIR$/.venv/pyvenv.cfg" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -62,6 +63,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
     &quot;Python.Selenium.executor&quot;: &quot;Run&quot;,
     &quot;Python.Selenium测试.executor&quot;: &quot;Run&quot;,
     &quot;Python.Test.executor&quot;: &quot;Run&quot;,
@@ -211,7 +213,31 @@
       <option name="project" value="LOCAL" />
       <updated>1727083934238</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="2024.9.26 - 方法优化与结构调整">
+      <option name="closed" value="true" />
+      <created>1727342259351</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1727342259351</updated>
+    </task>
+    <task id="LOCAL-00009" summary="2024.9.26 - 方法优化与结构调整">
+      <option name="closed" value="true" />
+      <created>1727342396987</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1727342396987</updated>
+    </task>
+    <task id="LOCAL-00010" summary="2024.9.26 - 方法优化与结构调整">
+      <option name="closed" value="true" />
+      <created>1727342517281</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1727342517281</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -221,6 +247,7 @@
     <MESSAGE value="2024.9.19 - 市场数据关键字爬取" />
     <MESSAGE value="2024.9.20 - 市场数据解析与定时爬取" />
     <MESSAGE value="2024.9.23 - 代码更新优化" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024.9.23 - 代码更新优化" />
+    <MESSAGE value="2024.9.26 - 方法优化与结构调整" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024.9.26 - 方法优化与结构调整" />
   </component>
 </project>

@@ -7,17 +7,35 @@ from driver_setup import setup_driver
 from news_scraper import read_external_html
 from html_parser import parse_left_html_content, parse_right_html_content
 from wechat_bot import send_to_wechat_robot
-from config import WECHAT_WEBHOOK_URL, URLS, TARGET_KEYWORD_MAIN, MAX_ITEMS_LEFT, MAX_ITEMS_RIGHT
+from config import WECHAT_WEBHOOK_URL, URLS, MAX_ITEMS_LEFT, MAX_ITEMS_RIGHT, TARGET_KEYWORD_MAIN
+
+# 打印当前工作目录与当前时间
+print(f"当前工作目录: {os.getcwd()}")
+print(f"当前时间：{time.ctime()}")
+
+
+def format_left_news(news_list):
+    return "\n\n".join([
+        f"{index + 1}. **内容**：\n{item['text']}\n"
+        for index, item in enumerate(news_list)
+    ])
+
+
+def format_right_news(news_list):
+    return "\n\n".join([
+        f"{index + 1}. **名称**：{item['name']}\n**影响**：{item['affects']}\n"
+        f"**前值**：{item['values'].get('前值', 'N/A')}\n"
+        f"**预期**：{item['values'].get('预期', 'N/A')}\n"
+        f"**公布**：{item['values'].get('公布', 'N/A')}\n"
+        for index, item in enumerate(news_list)
+    ])
 
 
 def fetch_market_news():
-    print("开始执行 fetch_market_news 函数")
     driver = setup_driver()
 
     try:
         for url in URLS:
-            print(f"从 {url} 获取数据中...")
-
             # 访问页面并获取左侧 iframe 内容
             iframe_content_left = read_external_html(url, driver, max_items=MAX_ITEMS_LEFT)
 
@@ -64,35 +82,26 @@ def fetch_market_news():
                 # 解析右侧 iframe 内容（全部获取）
                 right_news = parse_right_html_content(iframe_content_right, max_items=MAX_ITEMS_RIGHT)
 
-                # 过滤左侧新闻中包含主关键词的内容
-                filtered_left_news = [news for news in left_news if "金十数据整理" in news['text']]
+                # 过滤左侧市场数据中包含关键词的内容
+                filtered_left_news = [news for news in left_news if TARGET_KEYWORD_MAIN in news.get('text', '')]
 
-                # 格式化左侧新闻
-                formatted_left_news = "\n\n".join([
-                    f"{index + 1}. **时间**：{item['time']}\n**内容**：\n{item['text']}\n{'-' * 50}"
-                    for index, item in enumerate(filtered_left_news)
-                ])
+                # 格式化左侧市场数据
+                formatted_left_news = format_left_news(filtered_left_news)
 
-                # 只取右侧新闻的前十条
+                # 只取前十条右侧财经日历
                 top_10_right_news = right_news[:10]
 
                 # 格式化右侧新闻
-                formatted_right_news = "\n\n".join([
-                    f"{index + 1}. **时间**：{item['time']}\n**名称**：{item['name']}\n**影响**：{item['affects']}\n"
-                    f"**前值**：{item['values'].get('前值', 'N/A')}\n**预期**：{item['values'].get('预期', 'N/A')}\n"
-                    f"**公布**：{item['values'].get('公布', 'N/A')}\n{'-' * 50}"
-                    for index, item in enumerate(top_10_right_news)
-                ])
+                formatted_right_news = format_right_news(top_10_right_news)
 
-                # 组合消息内容
-                full_message = "## 左侧 Market News:\n" + (
-                    formatted_left_news if formatted_left_news else "无符合条件的左侧新闻。") + "\n\n" + \
-                               "## 右侧 Market News:\n" + (
-                                   formatted_right_news if formatted_right_news else "无右侧新闻。")
+                # 分别发送左侧和右侧的消息
+                if formatted_left_news:
+                    left_message = "## 市场数据:\n" + formatted_left_news
+                    send_to_wechat_robot(WECHAT_WEBHOOK_URL, left_message)
 
-                # 发送到企业微信
-                print(f"准备发送消息到企业微信，消息内容：\n{full_message}")
-                send_to_wechat_robot(WECHAT_WEBHOOK_URL, full_message)
+                if formatted_right_news:
+                    right_message = "## 财经日历:\n" + formatted_right_news
+                    send_to_wechat_robot(WECHAT_WEBHOOK_URL, right_message)
             else:
                 print("没有找到 iframe 的内容。")
     finally:

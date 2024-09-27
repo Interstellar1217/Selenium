@@ -80,21 +80,31 @@ def parse_right_html_content(iframe_content, max_items=MAX_ITEMS_RIGHT):
             affects = affect_element.text.strip() if affect_element else "N/A"
 
             # 获取前值、预期和公布
+            values = {
+                '前值': 'N/A',
+                '预期': 'N/A',
+                '公布': 'N/A'
+            }
+
             try:
-                values = {
-                    '前值': item.find('span', text='前值').find_next_sibling('span', class_='data-value__num').get_text(
-                        strip=True),
-                    '预期': item.find('span', text='预期').find_next_sibling('span', class_='data-value__num').get_text(
-                        strip=True),
-                    '公布': item.find('span', text='公布').find_next_sibling('span', class_='data-value__num').get_text(
-                        strip=True)
-                }
-            except AttributeError:
-                values = {
-                    '前值': 'N/A',
-                    '预期': 'N/A',
-                    '公布': 'N/A'
-                }
+                # 查找前值
+                prev_value_span = item.find('span', text=re.compile(r'前值'))
+                if prev_value_span:
+                    prev_value = prev_value_span.find_next_sibling('span', class_='data-value__num').get_text(strip=True)
+                    values['前值'] = prev_value
+
+                # 查找预期
+                expected_value_span = item.find('span', text=re.compile(r'预期'))
+                if expected_value_span:
+                    expected_value = expected_value_span.find_next_sibling('span', class_='data-value__num').get_text(strip=True)
+                    values['预期'] = expected_value
+
+                # 查找公布
+                published_value_span = item.find('span', text=re.compile(r'公布'))
+                if published_value_span:
+                    published_value = published_value_span.find_next_sibling('span', class_='data-value__num').get_text(strip=True)
+                    values['公布'] = published_value
+            except (AttributeError, ValueError):
                 print(f"无法找到前值、预期或公布的值，使用默认值 'N/A'。")
 
             news_item = {
