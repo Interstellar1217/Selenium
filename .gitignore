@@ -86,5 +86,7 @@ test-reports/
 Dockerfile
 docker-compose.yml
 docker-compose.override.yml
-./iframe_content.html
-./right_iframe_content.html
+
+#Ignore Process html files
+parse_file/iframe_content.html
+parse_file/right_iframe_content.html

@@ -54,11 +54,6 @@ def parse_left_html_content(html_content, max_items=MAX_ITEMS_LEFT):
 def parse_right_html_content(iframe_content, max_items=MAX_ITEMS_RIGHT):
     print("开始解析右侧 HTML 内容")
 
-    # 打印 iframe 内容，便于调试
-    with open('right_iframe_content.html', 'w', encoding='utf-8') as f:
-        f.write(iframe_content)
-    print("已将 iframe 内容保存到 right_iframe_content.html 文件中")
-
     soup = BeautifulSoup(iframe_content, 'html.parser')
 
     # 找到所有数据项
@@ -90,19 +85,22 @@ def parse_right_html_content(iframe_content, max_items=MAX_ITEMS_RIGHT):
                 # 查找前值
                 prev_value_span = item.find('span', text=re.compile(r'前值'))
                 if prev_value_span:
-                    prev_value = prev_value_span.find_next_sibling('span', class_='data-value__num').get_text(strip=True)
+                    prev_value = prev_value_span.find_next_sibling('span', class_='data-value__num').get_text(
+                        strip=True)
                     values['前值'] = prev_value
 
                 # 查找预期
                 expected_value_span = item.find('span', text=re.compile(r'预期'))
                 if expected_value_span:
-                    expected_value = expected_value_span.find_next_sibling('span', class_='data-value__num').get_text(strip=True)
+                    expected_value = expected_value_span.find_next_sibling('span', class_='data-value__num').get_text(
+                        strip=True)
                     values['预期'] = expected_value
 
                 # 查找公布
                 published_value_span = item.find('span', text=re.compile(r'公布'))
                 if published_value_span:
-                    published_value = published_value_span.find_next_sibling('span', class_='data-value__num').get_text(strip=True)
+                    published_value = published_value_span.find_next_sibling('span', class_='data-value__num').get_text(
+                        strip=True)
                     values['公布'] = published_value
             except (AttributeError, ValueError):
                 print(f"无法找到前值、预期或公布的值，使用默认值 'N/A'。")

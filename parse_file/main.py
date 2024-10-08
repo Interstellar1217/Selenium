@@ -1,4 +1,5 @@
 import os
+import re
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -15,17 +16,29 @@ print(f"当前时间：{time.ctime()}")
 
 
 def format_left_news(news_list):
-    return "\n\n".join([
-        f"{index + 1}. **内容**：\n{item['text']}\n"
-        for index, item in enumerate(news_list)
-    ])
+    # 移除“【金十数据整理：每日期货市场要闻速递（日期】”这个文本信息
+    cleaned_news_list = []
+    for item in news_list:
+        text = item['text']
+        # 使用正则表达式匹配并移除前缀
+        text = re.sub(r'【金十数据整理：每日期货市场要闻速递\(\d{1,2}月\d{1,2}日】', '', text)
+        cleaned_news_list.append({'text': text})
+
+    # 使用正则表达式提取内部的数字序号和内容
+    formatted_message = ""
+    for index, item in enumerate(cleaned_news_list, start=1):
+        # 提取内部的数字序号和内容
+        matches = re.findall(r'(\d+\.\s+.*?)(?=\d+\.\s+|$)', item['text'], re.DOTALL)
+        for match in matches:
+            formatted_message += f"{match.strip()}\n\n"
+
+    return formatted_message
 
 
 def format_right_news(news_list):
     return "\n\n".join([
-        f"{index + 1}. **名称**：{item['name']}\n**影响**：{item['affects']}\n"
+        f"{index + 1}. **名称**：{item['name']}\n"
         f"**前值**：{item['values'].get('前值', 'N/A')}\n"
-        f"**预期**：{item['values'].get('预期', 'N/A')}\n"
         f"**公布**：{item['values'].get('公布', 'N/A')}\n"
         for index, item in enumerate(news_list)
     ])
@@ -66,9 +79,10 @@ def fetch_market_news():
             # 获取右侧iframe的内容
             iframe_content_right = driver.page_source
 
-            # 将内容保存到文件
+            # 将内容保存到文件（仅用于调试）
             with open('right_iframe_content.html', 'w', encoding='utf-8') as f:
                 f.write(iframe_content_right)
+            print("已将 iframe 内容保存到 right_iframe_content.html 文件中")
 
             # 切换回默认内容
             driver.switch_to.default_content()
