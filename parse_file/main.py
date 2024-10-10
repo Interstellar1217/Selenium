@@ -102,11 +102,11 @@ def fetch_market_news():
                 # 格式化左侧市场数据
                 formatted_left_news = format_left_news(filtered_left_news)
 
-                # 只取前十条右侧财经日历
-                top_10_right_news = right_news[:10]
+                # 过滤右侧财经日历中公布值为“未公布”的条目
+                filtered_right_news = [news for news in right_news if news['values'].get('公布', 'N/A') != '未公布']
 
                 # 格式化右侧新闻
-                formatted_right_news = format_right_news(top_10_right_news)
+                formatted_right_news = format_right_news(filtered_right_news)
 
                 # 分别发送左侧和右侧的消息
                 if formatted_left_news:

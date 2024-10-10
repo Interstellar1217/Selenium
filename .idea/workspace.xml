@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5f8b217-b3f1-4913-b321-0d0a8add5050" name="更改" comment="2024.9.27 - 文本格式修正与项目测试">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="d5f8b217-b3f1-4913-b321-0d0a8add5050" name="更改" comment="2024.10.8 - 格式优化，去除冗余">
+      <change afterPath="$PROJECT_DIR$/crontab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parse_file/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_file/html_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/html_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_file/iframe_content.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/parse_file/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_file/right_iframe_content.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,30 +59,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;Python.Selenium.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Selenium测试.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Yanami_Anna.executor&quot;: &quot;Run&quot;,
-    &quot;Python.driver_setup.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.html_parser.executor&quot;: &quot;Run&quot;,
-    &quot;Python.list_file.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.parse_both.executor&quot;: &quot;Run&quot;,
-    &quot;Python.parse_jin10.executor&quot;: &quot;Run&quot;,
-    &quot;Python.市场数据爬虫.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/HLQH/PycharmProjects/Selenium&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Python.Selenium.executor": "Run",
+    "Python.Selenium测试.executor": "Run",
+    "Python.Test.executor": "Run",
+    "Python.Yanami_Anna.executor": "Run",
+    "Python.driver_setup.executor": "Debug",
+    "Python.html_parser.executor": "Run",
+    "Python.list_file.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.parse_both.executor": "Run",
+    "Python.parse_jin10.executor": "Run",
+    "Python.市场数据爬虫.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "deletionFromPopupRequiresConfirmation": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/HLQH/PycharmProjects/Selenium",
+    "run.code.analysis.last.selected.profile": "aDefault",
+    "settings.editor.selected.configurable": "Errors"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;stardust.markdown.MarkdownSplitEditorSuppressor:keyList&quot;: []
+  "keyToStringList": {
+    "stardust.markdown.MarkdownSplitEditorSuppressor:keyList": []
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\HLQH\PycharmProjects\Selenium\parse_file" />
@@ -114,11 +115,12 @@
     </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Selenium" />
-      <option name="ENV_FILES" value="" />
+      <option name="ENV_FILES" value="$PROJECT_DIR$/.env" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="WECHAT_WEBHOOK_URL" value="https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=53d31441-8df4-4630-81f1-1295b4f1b4a0" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/parse_file" />
@@ -134,6 +136,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.Test" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
@@ -245,8 +251,19 @@
       <option name="project" value="LOCAL" />
       <updated>1727428115477</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="2024.10.8 - 格式优化，去除冗余">
+      <option name="closed" value="true" />
+      <created>1728378363076</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1728378363076</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -257,6 +274,7 @@
     <MESSAGE value="2024.9.23 - 代码更新优化" />
     <MESSAGE value="2024.9.26 - 方法优化与结构调整" />
     <MESSAGE value="2024.9.27 - 文本格式修正与项目测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024.9.27 - 文本格式修正与项目测试" />
+    <MESSAGE value="2024.10.8 - 格式优化，去除冗余" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024.10.8 - 格式优化，去除冗余" />
   </component>
 </project>
