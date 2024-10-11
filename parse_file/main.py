@@ -35,10 +35,13 @@ def format_left_news(news_list):
     return formatted_message
 
 
-def format_right_news(news_list):
+def format_right_news(news_list, max_items=20):
+    news_list = news_list[:max_items]
+
     return "\n\n".join([
         f"{index + 1}. **名称**：{item['name']}\n"
         f"**前值**：{item['values'].get('前值', 'N/A')}\n"
+        f"**预期**：{item['values'].get('预期', 'N/A')}\n"
         f"**公布**：{item['values'].get('公布', 'N/A')}\n"
         for index, item in enumerate(news_list)
     ])
@@ -103,7 +106,7 @@ def fetch_market_news():
                 formatted_left_news = format_left_news(filtered_left_news)
 
                 # 过滤右侧财经日历中公布值为“未公布”的条目
-                filtered_right_news = [news for news in right_news if news['values'].get('公布', 'N/A') != '未公布']
+                filtered_right_news = [news for news in right_news if news['values'].get('公布', 'N/A') != '']
 
                 # 格式化右侧新闻
                 formatted_right_news = format_right_news(filtered_right_news)
