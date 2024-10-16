@@ -1,2 +1,2 @@
 # m h  dom mon dow   command
-0 8,20 * * 1-5 root python /app/main.py
+0 8,20 * * 1-5 python3 /app/parse_file/main.py >> /app/logs/cron.log 2>&1

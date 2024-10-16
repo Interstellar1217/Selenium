@@ -11,7 +11,7 @@ def setup_driver():
     # 指定 User-Agent
     chrome_options.add_argument(
         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/58.0.3029.110 Safari/537.3"
+        "Chrome/129.0.6668.101 Safari/537.36"
     )
 
     # 无头模式

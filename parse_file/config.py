@@ -1,9 +1,5 @@
 import os
 
-# Chrome WebDriver 路径
-CHROMEDRIVER_PATH = os.environ.get('CHROMEDRIVER_PATH', 'D:/chromedriver-win64/chromedriver.exe')
-CHROME_BINARY_PATH = os.environ.get('CHROME_BINARY_PATH', 'C:/Program Files/Google/Chrome/Application/chrome.exe')
-
 # 企业微信 Webhook URL
 WECHAT_WEBHOOK_URL = os.environ.get('WECHAT_WEBHOOK_URL', 'WECHAT_WEBHOOK_URL')
 

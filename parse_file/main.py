@@ -35,7 +35,7 @@ def format_left_news(news_list):
     return formatted_message
 
 
-def format_right_news(news_list, max_items=20):
+def format_right_news(news_list, max_items=30):
     news_list = news_list[:max_items]
 
     return "\n\n".join([
