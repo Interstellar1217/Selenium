@@ -2,10 +2,14 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from config import MAX_SCROLL_ATTEMPTS, MAX_ITEMS_LEFT, MAX_ITEMS_RIGHT
+from config import MAX_SCROLL_ATTEMPTS
 
 
-def read_external_html(url, driver, max_items=200):
+def read_external_html(url, driver, max_items=500):
+    """
+    访问指定URL，切换到iframe，并加载更多数据直到达到最大条数或无法加载更多。
+    返回iframe的内容。
+    """
     try:
         print(f"访问 URL: {url}")
         driver.get(url)

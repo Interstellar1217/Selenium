@@ -4,17 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d5f8b217-b3f1-4913-b321-0d0a8add5050" name="更改" comment="2024.10.10 - Selenium逻辑优化">
+    <list default="true" id="d5f8b217-b3f1-4913-b321-0d0a8add5050" name="更改" comment="2024.10.15 - Docker容器化部署">
       <change afterPath="$PROJECT_DIR$/google-chrome-stable_current_amd64.deb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/parse_file/__init__.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/parse_file/test_date_switch.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/crontab" beforeDir="false" afterPath="$PROJECT_DIR$/crontab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parse_file/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parse_file/driver_setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/driver_setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parse_file/html_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/html_parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parse_file/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parse_file/news_scraper.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/news_scraper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parse_file/wechat_bot.py" beforeDir="false" afterPath="$PROJECT_DIR$/parse_file/wechat_bot.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,64 +64,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;Python.Selenium.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Selenium测试.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Yanami_Anna.executor&quot;: &quot;Run&quot;,
-    &quot;Python.driver_setup.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.html_parser.executor&quot;: &quot;Run&quot;,
-    &quot;Python.list_file.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.parse_both.executor&quot;: &quot;Run&quot;,
-    &quot;Python.parse_jin10.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_date_switch.executor&quot;: &quot;Run&quot;,
-    &quot;Python.市场数据爬虫.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/HLQH/PycharmProjects/Selenium&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor.code.editing&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Python.Selenium.executor": "Run",
+    "Python.Selenium测试.executor": "Run",
+    "Python.Test.executor": "Run",
+    "Python.Yanami_Anna.executor": "Run",
+    "Python.driver_setup.executor": "Debug",
+    "Python.html_parser.executor": "Run",
+    "Python.list_file.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.parse_both.executor": "Run",
+    "Python.parse_jin10.executor": "Run",
+    "Python.test_date_switch.executor": "Run",
+    "Python.市场数据爬虫.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "deletionFromPopupRequiresConfirmation": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/HLQH/PycharmProjects/Selenium",
+    "run.code.analysis.last.selected.profile": "aDefault",
+    "settings.editor.selected.configurable": "preferences.editor.code.editing"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;stardust.markdown.MarkdownSplitEditorSuppressor:keyList&quot;: []
+  "keyToStringList": {
+    "stardust.markdown.MarkdownSplitEditorSuppressor:keyList": []
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\HLQH\PycharmProjects\Selenium\parse_file" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="Test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Selenium" />
       <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/parse_file" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/parse_file/Test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="Selenium" />
-      <option name="ENV_FILES" value="$PROJECT_DIR$/.env" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -140,37 +120,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test_date_switch" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Selenium" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/parse_file" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/parse_file/test_date_switch.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Python.main" />
-      <item itemvalue="Python.Test" />
-      <item itemvalue="Python.test_date_switch" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test_date_switch" />
-        <item itemvalue="Python.Test" />
+        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -302,7 +254,15 @@
       <option name="project" value="LOCAL" />
       <updated>1728640285372</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="2024.10.15 - Docker容器化部署">
+      <option name="closed" value="true" />
+      <created>1729040745644</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1729040745645</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -320,6 +280,7 @@
     <MESSAGE value="2024.10.8 - 格式优化，去除冗余" />
     <MESSAGE value="2024.10.10 - 延长信息获取有效时间" />
     <MESSAGE value="2024.10.10 - Selenium逻辑优化" />
-    <option name="LAST_COMMIT_MESSAGE" value="2024.10.10 - Selenium逻辑优化" />
+    <MESSAGE value="2024.10.15 - Docker容器化部署" />
+    <option name="LAST_COMMIT_MESSAGE" value="2024.10.15 - Docker容器化部署" />
   </component>
 </project>

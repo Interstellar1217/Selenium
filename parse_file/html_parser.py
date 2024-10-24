@@ -1,16 +1,29 @@
 import re
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
-from config import TARGET_KEYWORD_LEFT, MAX_ITEMS_LEFT, MAX_ITEMS_RIGHT
+from config import TARGET_KEYWORD_LEFT_MORNING, TARGET_KEYWORD_LEFT_NIGHT, MAX_ITEMS_LEFT, MAX_ITEMS_RIGHT
 
 
 def parse_left_html_content(html_content, max_items=MAX_ITEMS_LEFT):
+    """
+    解析左侧 HTML 内容，根据当前时间选择关键字并筛选出符合条件的新闻条目。
+    """
     print("开始解析左侧 HTML 内容")
+
+    # 获取当前时间
+    now = datetime.now()
+    current_hour = now.hour
+
+    # 根据当前时间选择合适的关键字
+    if 8 <= current_hour < 16:
+        target_keyword = TARGET_KEYWORD_LEFT_MORNING
+    else:
+        target_keyword = TARGET_KEYWORD_LEFT_NIGHT
+
     soup = BeautifulSoup(html_content, 'html.parser')
     flash_items = soup.find_all('div', class_='jin-flash_item')
 
-    news_list = []
-    now = datetime.now()
+    left_news = []
     twenty_four_hours_ago = now - timedelta(hours=24)
 
     for item in flash_items:
@@ -20,6 +33,7 @@ def parse_left_html_content(html_content, max_items=MAX_ITEMS_LEFT):
         if time_element and text_element:
             time_text = time_element.text.strip()
             text_text = text_element.text.strip()
+            print(f"时间: {time_text}, 文本: {text_text}")
 
             # 解析时间
             try:
@@ -34,24 +48,33 @@ def parse_left_html_content(html_content, max_items=MAX_ITEMS_LEFT):
                 print("新闻时间早于24小时前，跳过。")
                 continue
 
-            if TARGET_KEYWORD_LEFT in text_text:
-                news_list.append({"time": time_text, "text": text_text})
-                print(f"找到包含关键词 '{TARGET_KEYWORD_LEFT}' 的新闻。")
+            # 检查是否包含关键字
+            if isinstance(target_keyword, list):
+                if any(keyword in text_text for keyword in target_keyword):
+                    left_news.append({"time": time_text, "text": text_text})
+                    print(f"找到包含关键词 '{target_keyword}' 的新闻: {text_text}")
+            else:
+                if target_keyword in text_text:
+                    left_news.append({"time": time_text, "text": text_text})
+                    print(f"找到包含关键词 '{target_keyword}' 的新闻: {text_text}")
 
-                # 只获取前 max_items 条新闻
-                if len(news_list) >= max_items:
-                    print(f"已达到最大条数 {max_items}，停止搜索。")
-                    break
+            # 只获取前 max_items 条新闻
+            if len(left_news) >= max_items:
+                print(f"已达到最大条数 {max_items}，停止搜索。")
+                break
         else:
             print("某个 'jin-flash_item' 缺少时间或文本元素。")
 
-    if not news_list:
-        print(f"没有找到包含关键词 '{TARGET_KEYWORD_LEFT}' 的新闻。")
+    if not left_news:
+        print(f"没有找到包含关键词 '{target_keyword}' 的新闻。")
 
-    return news_list
+    return left_news
 
 
 def parse_right_html_content(iframe_content, max_items=MAX_ITEMS_RIGHT):
+    """
+    解析右侧 HTML 内容，提取财经日历的相关信息。
+    """
     print("开始解析右侧 HTML 内容")
 
     soup = BeautifulSoup(iframe_content, 'html.parser')
