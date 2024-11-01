@@ -90,7 +90,6 @@ docker-compose.override.yml
 #Ignore Process html files
 parse_file/left_iframe_content.html
 parse_file/right_iframe_content.html
-parse_file/test_date_switch.py
 
 #Ignore Chrome package
 google-chrome-stable_current_amd64.deb
